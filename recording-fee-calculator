@@ -1,55 +1,181 @@
-/*
-const baseFee = 68.50;
-// Base fee to record Mortgage (first four pages)
-let morePages = 2.00
-// Each additional page after four is $2.00
-let pageCount = 22;
-// Total page count of Mortgage
-let afterFour = (pageCount - 4);
-// Additional pages to be charged at $2.00 each
-afterFour *= morePages;
-// Multiplies the number of pages after four by the cost of each additional page
-let totalFee = baseFee + afterFour;
-// Calculates the total fee
-console.log(totalFee);
-// Prints the total fee charged by ROD
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lancaster County Recording Fee Calculator</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Recording Fee Calculator</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Amatic+SC&family=Merriweather:wght@900&family=Quicksand&family=Reenie+Beanie&display=swap" rel="stylesheet">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Raleway:wght@300&family=Red+Hat+Mono:wght@600&display=swap');
 
-afterFour = true;
-pageCount = 22;
-if (pageCount > 4) {
-    return afterFour = (pageCount - 4);
-} else {
-    console.log(`Recording fee: ${totalFee}`);
-}
+            body {
+                background-image: url("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80");
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-attachment: fixed;
+                display: grid;
+                margin: 0 auto;
+            }
+            * {
+                box-sizing: border-box;
+                text-align: center;
+            }
+            a {
+                text-decoration: none;
+                color: #00addf;
+            }
+            a:hover {
+                color: #000;
+            }
+            h2, h3, h4, p, a, label {
+                font-family: 'Raleway', sans-serif;
+            }
+            h2 {
+                font-weight: bold;
+                font-size: 2em;
+            }
+            span {
+                font-family: 'Indie Flower', cursive;
+                font-size: 1.5em;
+                font-weight: bold;
+            }
 
-const baseFee = (deed = 70.25; mortgage = 68.50; assignment = 68.50; satisfaction = 68.50) => {
-    console.log(``)
-}
-*/
+            /*HEADER*/
+            .header-container {
+                position: relative;
+                text-align: center;
+                color: #fff;
+            }
+            .header-img {
+                opacity: 0.3;
+                height: 400px;
+                width: 100%;
+            }
+            .header-text {
+                font-family: 'Red Hat Mono', monospace;
+                font-size: 40px;
+                color: #000;
+            }
+            h1 {
+                position: absolute;
+                bottom: 8px;
+                left: 16px;
+                opacity: 1;
+                color: #000;
+            }
+            /*ABOUT SECTION*/
+            .about-text {
+                font-family: 'Raleway', sans-serif;
+                font-size: 24px;
+                background-color: white;
+                opacity: 0.9;
+                margin: 30px auto;
+                padding: 15px;
+                min-width: 50%;
+                max-width: 400px;
+            }
+             /*FOOTER*/
+            footer {
+                color: white;
+                background-color: black;
+                opacity: 0.9;
+                min-height: 200px;
+                margin: 30px 0 0;
+                display: block;
+            }
+            .contact {
+                float: left;
+                padding: 35px;
+            }
+            .mailing-list {
+                float: right;
+                padding: 35px;
+            }
 
-// Function which determines the base fee of a document
-const baseFee = docType => {
-    if (docType === "Deed") {
-        return 70.25;
-    } else if (docType === "Power of Attorney") {
-        return 18.50;
-    } else { return 68.50;
+            @media only screen and (max-width: 480px) {
+
+                .header-container, footer {
+                width: 100%;
+                min-height: 200px;
+                overflow: visible;
+                }
+                .header-img {
+                max-height: 100%;
+                }
+                .header-text {
+                min-width: 450px;
+                }
+                h1 {
+                font-size: 2em;
+                }
+                h2, h3, h4, p, a {
+                font-size: 1.5em;
+                }
+                .about-text {
+                min-width: 85%;
+                }
+                footer {
+                float:none;
+                display: grid;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h2>Recording Fee Calculator</h2>
+            <h2>Lancaster County, PA</h2>
+        </header>
+        
+      <!--Main Text-->
+        <div id="calculator">
+            <input type="text" id="doctype" placeholder="Document Type" />
+            <input type="number" id="pagecount" placeholder="Number of Pages" />
+            <input type="button" value="Calculate" onclick="totalCharges()" />
+        </div>
+      
+ 
+        
+
+        <script>
+        const baseFee = docType => {
+            if (docType === "Deed") {
+                return 70.25;
+            } else if (docType === "Power of Attorney") {
+                return 18.50;
+            } else { return 68.50;
+                }
         }
-}
 
-// Function which determines the total fee based on base fee and page count
-const additionalPageFees = pageCount => {
-    let overFour = 0;
-    if (pageCount > 4) {
-        overFour = pageCount -= 4;
-        return overFour *= 2;
-    }
-}
+    // Function which determines the total fee based on base fee and page count
+        const additionalPageFees = pageCount => {
+            let overFour = 0;
+            if (pageCount > 4) {
+                overFour = pageCount -= 4;
+                return overFour *= 2;
+            }
+        }
 
-// Function which asks whether "fee" is truthy; if so, 4.75 e-recording fee is returned
-const eFile = fee => fee ? 4.75 : 0;
+    // Function which asks whether "fee" is truthy; if so, 4.75 e-recording fee is returned
+        const eFile = fee => fee ? 4.75 : 0;
 
-// High-order function which returns other functions as parameters
-const totalCharges = (baseFee, additionalPageFees, eFile) => {
-    return (baseFee + additionalPageFees + eFile);
-}
+    // High-order function which returns other functions as parameters
+        const totalCharges = (baseFee, additionalPageFees, eFile) => {
+            return (baseFee + additionalPageFees + eFile);
+        }
+        </script>
+     <!--Footer-->
+        <footer>
+            <section class="contact">
+                <p><span>Contact</span></p>
+                <a href="mailto:name@email.com">name@email.com</a>
+                <p>(XXX) XXX-XXXX</p>
+            </section>
+        </footer>
+    </body>
+</html>
