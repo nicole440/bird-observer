@@ -1,3 +1,4 @@
+/*
 const baseFee = 68.50;
 // Base fee to record Mortgage (first four pages)
 let morePages = 2.00
@@ -12,3 +13,43 @@ let totalFee = baseFee + afterFour;
 // Calculates the total fee
 console.log(totalFee);
 // Prints the total fee charged by ROD
+
+afterFour = true;
+pageCount = 22;
+if (pageCount > 4) {
+    return afterFour = (pageCount - 4);
+} else {
+    console.log(`Recording fee: ${totalFee}`);
+}
+
+const baseFee = (deed = 70.25; mortgage = 68.50; assignment = 68.50; satisfaction = 68.50) => {
+    console.log(``)
+}
+*/
+
+// Function which determines the base fee of a document
+const baseFee = docType => {
+    if (docType === "Deed") {
+        return 70.25;
+    } else if (docType === "Power of Attorney") {
+        return 18.50;
+    } else { return 68.50;
+        }
+}
+
+// Function which determines the total fee based on base fee and page count
+const additionalPageFees = pageCount => {
+    let overFour = 0;
+    if (pageCount > 4) {
+        overFour = pageCount -= 4;
+        return overFour *= 2;
+    }
+}
+
+// Function which asks whether "fee" is truthy; if so, 4.75 e-recording fee is returned
+const eFile = fee => fee ? 4.75 : 0;
+
+// High-order function which returns other functions as parameters
+const totalCharges = (baseFee, additionalPageFees, eFile) => {
+    return (baseFee + additionalPageFees + eFile);
+}
