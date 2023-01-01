@@ -1,31 +1,3 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Lancaster County Recording Fee Calculator</title>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Recording Fee Calculator</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Amatic+SC&family=Merriweather:wght@900&family=Quicksand&family=Reenie+Beanie&display=swap" rel="stylesheet">
-    </head>
-
-    <body>
-        <header>
-            <h2>Recording Fee Calculator</h2>
-            <h2>Lancaster County, PA</h2>
-        </header>
-        
-      <!--Main Text-->
-        <div id="calculator">
-            <input type="text" id="doctype" placeholder="Document Type" />
-            <input type="number" id="pagecount" placeholder="Number of Pages" />
-            <input type="button" value="Calculate" onclick="totalCharges()" />
-        </div>
-      
-
-        <script>
         const baseFee = docType => {
             if (docType === "Deed") {
                 return 70.25;
@@ -51,16 +23,4 @@
         const totalCharges = (baseFee, additionalPageFees, eFile) => {
             return (baseFee + additionalPageFees + eFile);
         }
-        </script>
         
-        
-     <!--Footer-->
-        <footer>
-            <section class="contact">
-                <p><span>Contact</span></p>
-                <a href="mailto:name@email.com">name@email.com</a>
-                <p>(XXX) XXX-XXXX</p>
-            </section>
-        </footer>
-    </body>
-</html>
