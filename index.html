@@ -21,9 +21,19 @@
         
         <!--Main Text-->
         <div id="calculator">
-            <input type="text" id="doctype" placeholder="Document Type" />
-            <input type="number" id="pagecount" placeholder="Number of Pages" />
-            <input type="button" value="Calculate" onclick="totalCharges()" />
+            <form>
+                <label for="doctype">Document Type:</label>
+                <select id="doctype" name="doctype">
+                    <option value="">--Please choose an option--</option>
+                    <option value="deed">Deed</option>
+                    <option value="poa">Power of Attorney</option>
+                    <option value="mortgage">Mortgage</option>
+                    <option value="assignment">Assignment of Rents/Leases</option>
+                    <option value="satpiece">Satisfaction Piece</option>
+                </select>
+                <input type="number" id="pagecount" placeholder="Number of Pages" />
+                <input type="button" value="Calculate" onclick="totalCharges()" />
+            </form>
         </div>
 
         <!--Footer-->
