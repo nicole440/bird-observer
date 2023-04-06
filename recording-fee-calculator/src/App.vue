@@ -1,39 +1,24 @@
 <template>
-  <div class="app">
-    <head>
-      <title>Lancaster County Recording Fee Calculator</title>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Recording Fee Calculator</title>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Aboreto&family=Amatic+SC&family=Merriweather:wght@900&family=Quicksand&family=Reenie+Beanie&display=swap"
-        rel="stylesheet"
-      />
-    </head>
+  <div id="app">
     <the-header />
     <input-form />
-    <the-footer />
   </div>
 </template>
 
 <script>
 import TheHeader from "./components/TheHeader.vue";
 import InputForm from "./components/InputForm.vue";
-import TheFooter from "./components/TheFooter.vue";
 
 export default {
   name: "App",
   components: {
     TheHeader,
     InputForm,
-    TheFooter,
   },
 };
 </script>
 
+// TODO update styles to reflect revised elements
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Raleway:wght@300&family=Red+Hat+Mono:wght@600&display=swap");
 
