@@ -11,7 +11,7 @@
                     <option value="satpiece">Satisfaction Piece</option>
                 </select>
                 <input type="number" id="pagecount" placeholder="Total Pages" />
-
+                <input type="checkbox" v-bind:checked="document.efile"/>
                 <input type="button" id="add-another" value="Add Another" v-on:click.prevent="addDocument" v-if="showForm === true"/>
                 <input type="button" id="clear" value="Clear" v-on:submit.prevent="resetForm" />
                 <input type="button" id="calculate" value="Calculate" v-on:submit.prevent="getTotalCharges" />
@@ -32,7 +32,6 @@ export default {
         resetForm() {
             this.showForm = true;
         },
-        
     }
 }
 </script>
