@@ -1,25 +1,32 @@
 <template>
   <div id="app">
-    <the-header />
+    <img alt="Vue logo" src="./assets/logo.png">
     <input-form />
   </div>
 </template>
 
 <script>
-import TheHeader from "./components/TheHeader.vue";
-import InputForm from "./components/InputForm.vue";
+import InputForm from './components/InputForm.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    TheHeader,
-    InputForm,
-  },
-};
+    InputForm
+  }
+}
 </script>
 
 // TODO update styles to reflect revised elements
 <style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Raleway:wght@300&family=Red+Hat+Mono:wght@600&display=swap");
 
 body {
