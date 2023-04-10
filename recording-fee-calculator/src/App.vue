@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <input-form />
+    <h1>Recording Fee Calculator</h1>
+    <hello-world/>
+    <input-form/>
   </div>
 </template>
 
 <script>
+import HelloWorld from './components/HelloWorld.vue'
 import InputForm from './components/InputForm.vue'
 
 export default {
   name: 'App',
   components: {
-    InputForm
+    InputForm,
+    HelloWorld
   }
 }
 </script>
@@ -26,7 +29,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-
+/*
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Raleway:wght@300&family=Red+Hat+Mono:wght@600&display=swap");
 
 body {
@@ -48,6 +51,7 @@ a {
 a:hover {
   color: #000;
 }
+h1,
 h2,
 h3,
 h4,
@@ -56,9 +60,9 @@ a,
 label {
   font-family: "Raleway", sans-serif;
 }
-h2 {
+h1 {
   font-weight: bold;
-  font-size: 2em;
+  font-size: 3em;
 }
 span {
   font-family: "Indie Flower", cursive;
@@ -66,6 +70,7 @@ span {
   font-weight: bold;
 }
 
+/* Media queries no longer needed with Vue framework
 @media only screen and (max-width: 480px) {
   .header-container,
   footer {
@@ -93,4 +98,5 @@ span {
     min-width: 85%;
   }
 }
+*/
 </style>
