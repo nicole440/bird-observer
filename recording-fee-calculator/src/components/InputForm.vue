@@ -42,6 +42,11 @@
       <p class="form-total" v-bind="calculateTotalCharges">Total Charges: ${{ calculateTotalCharges.toFixed(2) }}</p>
       <button type="button" class="form-button">Add Document</button>
     </div>
+    <div class="popup">
+      <span class="hello">hello!</span>
+      <p class="message">The fees specified herein are specific to the recording fees set by the Lancaster County Recorder of Deeds Office
+        and the Simplifile e-recording software. Please confirm base fees remain accurate before recording.</p>
+    </div>
   </div>
 </template>
 <script>
@@ -112,18 +117,18 @@ export default {
       return total;
     },
   },
-
 };
 </script>
+
 <style scoped>
 /* Container */
 .inner-container {
   max-width: 600px;
   margin: 50px auto;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 /* Form */
@@ -217,6 +222,39 @@ export default {
   margin-top: 32px;
   font-size: 24px;
   font-weight: 500;
+}
+
+.popup {
+  position: fixed;
+  bottom: 0;
+  right: 30px;
+  background: linear-gradient(to bottom, #ffd900, #eee199);
+  color: #000;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  width: 100px;
+  height: 35px;
+  transition: all 0.2s ease-in-out;
+}
+
+.popup p {
+  margin-bottom: 10px;
+}
+
+.popup:hover {
+  width: 300px;
+  height: 200px;
+  padding: 10px;
+}
+
+.popup:hover .message {
+  display: block;
+}
+
+.hello {
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 </style>
