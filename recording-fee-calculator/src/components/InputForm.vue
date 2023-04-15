@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="inner-container">
     <div class="form">
       <h1 class="form-title">Recording Fee Calculator</h1>
       <form class="form-body">
@@ -38,9 +38,9 @@
             Add Simplifile Fee ($4.75)
           </label>
         </div>
-        <button type="button" @click="calculateTotalCharges" class="form-button">Calculate Fee</button>
       </form>
-      <p class="form-total">Total Charges: ${{ calculateTotalCharges.toFixed(2) }}</p>
+      <p class="form-total" v-bind="calculateTotalCharges">Total Charges: ${{ calculateTotalCharges.toFixed(2) }}</p>
+      <button type="button" class="form-button">Add Document</button>
     </div>
   </div>
 </template>
@@ -101,6 +101,9 @@ export default {
       }
     },
     calculateTotalCharges() {
+      if (this.documentType == "") {
+        return 0;
+      }
       let total = 0;
       total =
         this.getBaseFee +
@@ -109,13 +112,14 @@ export default {
       return total;
     },
   },
+
 };
 </script>
 <style scoped>
 /* Container */
-.form-container {
+.inner-container {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 50px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -128,8 +132,8 @@ export default {
   max-width: 500px;
   background-color: #fff;
   padding: 40px;
-  /* border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
+  border-radius: 8px;
+  box-shadow: 20px 24px 28px rgba(0, 0, 0, 0.5);
   text-align: center;
 }
 
@@ -200,6 +204,7 @@ export default {
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
+  border: none;
   transition: background-color 0.2s ease;
 }
 
