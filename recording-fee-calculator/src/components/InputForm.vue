@@ -26,12 +26,15 @@
             class="form-input"
           />
         </div>
-        <div class="form-group">
-          <label v-if="this.document == 'Deed'">
-            <input type="radio" v-model="hasTransferTax" v-bind:value="0">Exempt
-            <input type="radio" v-model="hasTransferTax" v-bind:value="1">Not Exempt
-          </label>
+
+<!-- Work on displaying this group when appropriate -->
+        <div class="form-group" v-if="this.document === 'Deed'">
+          <input type="number" v-model="consideration" />
+          <label for="transfer-tax">Transfer Tax:</label>
+          <input type="radio" v-model="hasTransferTax" v-bind:value="false"/>Exempt
+          <input type="radio" v-model="hasTransferTax" v-bind:value="true" />Not Exempt
         </div>
+
         <div>
           <label>
             <input type="checkbox" v-model="hasFee" />
@@ -39,16 +42,23 @@
           </label>
         </div>
       </form>
-      <p class="form-total" v-bind="calculateTotalCharges">Total Charges: ${{ calculateTotalCharges.toFixed(2) }}</p>
-      <button type="button" class="form-button">Add Document</button>
+      <p class="form-total" v-bind="calculateTotalCharges">
+        Total Charges: ${{ calculateTotalCharges.toFixed(2) }}
+      </p>
+      <button type="button" class="form-button">Add Document</button> <!-- Work on making this button add a document to the data store and display it on the page-->
     </div>
     <div class="popup">
       <span class="hello">hello!</span>
-      <p class="message">The fees specified herein are specific to the recording fees set by the Lancaster County Recorder of Deeds Office
-        and the Simplifile e-recording software. Please confirm base fees remain accurate before recording.</p>
+      <p class="message">
+        The fees specified herein are specific to the recording fees set by the
+        Lancaster County Recorder of Deeds Office and the Simplifile e-recording
+        software. Please confirm base fees remain accurate before submitting
+        documents for recording.
+      </p>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   name: "InputForm",
@@ -61,10 +71,13 @@ export default {
       BASE_PAGE_THRESHOLD: 4,
       SIMPLIFILE_FEE: 4.75,
       OVER_FOUR_PAGE_FEE: 2.0,
+
       documentType: "",
       pageCount: 1,
       hasFee: false,
-      hasTransferTax: false
+      hasTransferTax: false,
+      consideration: 0,
+      transferTaxAmount: 0,
     };
   },
   computed: {
@@ -93,17 +106,16 @@ export default {
       }
       return additionalPageFee;
     },
-    calculateTransferTax() {
-      if (this.hasTransferTax == 0) {
-        return false;
-      } return true;
-    },
     getERecordingFee() {
       if (this.hasFee) {
         return this.SIMPLIFILE_FEE;
       } else {
         return 0;
       }
+    },
+    calculateTransferTax() {
+      let transferTaxAmount = this.consideration * 0.02;
+      return transferTaxAmount;
     },
     calculateTotalCharges() {
       if (this.documentType == "") {
@@ -113,6 +125,8 @@ export default {
       total =
         this.getBaseFee +
         this.getAdditionalPageFee +
+        this.transferTaxAmount +
+        this.consideration +
         this.getERecordingFee;
       return total;
     },
@@ -121,6 +135,7 @@ export default {
 </script>
 
 <style scoped>
+
 /* Container */
 .inner-container {
   max-width: 600px;
@@ -145,7 +160,7 @@ export default {
 /* Title */
 .form h1 {
   margin-bottom: 30px;
-  font-size: 36px;
+  font-size: 2em;
   font-family: "Raleway", sans-serif;
 }
 
@@ -217,7 +232,7 @@ export default {
   background-color: #555;
 }
 
-/* Result */
+/* Total */
 .form p {
   margin-top: 32px;
   font-size: 24px;
@@ -228,7 +243,7 @@ export default {
   position: fixed;
   bottom: 0;
   right: 30px;
-  background: linear-gradient(to bottom, #ffd900, #eee199);
+  background: linear-gradient(to bottom, rgb(99, 172, 240), rgba(122, 218, 235, 0.7));
   color: #000;
   text-align: center;
   border-radius: 5px;
@@ -248,13 +263,8 @@ export default {
   padding: 10px;
 }
 
-.popup:hover .message {
-  display: block;
-}
-
 .hello {
   font-size: 1.5em;
   font-weight: bold;
 }
-
 </style>
