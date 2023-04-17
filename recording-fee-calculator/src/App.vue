@@ -2,17 +2,20 @@
   <div id="app">
       <div class="container">
         <InputForm />
+        <DocumentList />
       </div>
   </div>
 </template>
 
 <script>
 import InputForm from './components/InputForm.vue'
+import DocumentList from './components/DocumentList.vue'
 
 export default {
   name: 'App',
   components: {
     InputForm,
+    DocumentList
   }
 }
 </script>

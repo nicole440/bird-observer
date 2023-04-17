@@ -27,10 +27,11 @@
           />
         </div>
 
-<!-- Work on displaying this group when appropriate -->
-        <div class="form-group" v-if="this.document === 'Deed'">
+<!-- TODO fix radio buttons -->
+        <div class="form-group" id="consideration" v-if="documentType=='Deed'"> 
+          <label for="consideration">Consideration: </label>
           <input type="number" v-model="consideration" />
-          <label for="transfer-tax">Transfer Tax:</label>
+          <label for="transfer-tax">Transfer Tax: </label>
           <input type="radio" v-model="hasTransferTax" v-bind:value="false"/>Exempt
           <input type="radio" v-model="hasTransferTax" v-bind:value="true" />Not Exempt
         </div>
@@ -45,7 +46,7 @@
       <p class="form-total" v-bind="calculateTotalCharges">
         Total Charges: ${{ calculateTotalCharges.toFixed(2) }}
       </p>
-      <button type="button" class="form-button">Add Document</button> <!-- Work on making this button add a document to the data store and display it on the page-->
+      <button type="button" class="form-button" v-on:click="addDocument">Add Document</button> <!-- Work on making this button add a document to the data store and display it on the page-->
     </div>
     <div class="popup">
       <span class="hello">hello!</span>
@@ -62,7 +63,7 @@
 <script>
 export default {
   name: "InputForm",
-
+  
   data() {
     return {
       DEED_BASE_FEE: 70.25,
@@ -130,6 +131,11 @@ export default {
         this.getERecordingFee;
       return total;
     },
+    addDocument() {
+      let documentArray = [];
+      documentArray.push(this.document);
+      return documentArray;
+    }
   },
 };
 </script>
