@@ -27,13 +27,15 @@
           />
         </div>
 
-<!-- TODO fix radio buttons -->
+<!-- TODO fix radio buttons and make sure transfer tax gets calculated if needed -->
         <div class="form-group" id="consideration" v-if="documentType=='Deed'"> 
           <label for="consideration">Consideration: </label>
           <input type="number" v-model="consideration" />
           <label for="transfer-tax">Transfer Tax: </label>
-          <input type="radio" v-model="hasTransferTax" v-bind:value="false"/>Exempt
-          <input type="radio" v-model="hasTransferTax" v-bind:value="true" />Not Exempt
+          <input type="radio" id="noTax" v-model="hasTransferTax" value="false"/>
+          <label for="noTax">Exempt</label>
+          <input type="radio" id ="tax" v-model="hasTransferTax" value="true" />
+          <label for="tax">Not Exempt</label>
         </div>
 
         <div>
@@ -46,7 +48,9 @@
       <p class="form-total" v-bind="calculateTotalCharges">
         Total Charges: ${{ calculateTotalCharges.toFixed(2) }}
       </p>
-      <button type="button" class="form-button" v-on:click="addDocument">Add Document</button> <!-- Work on making this button add a document to the data store and display it on the page-->
+      <button type="reset" class="form-button" id="clear" v-on:click.prevent="clearForm">Clear Form</button>
+<!-- TODO Work on making this button add a document to the data store and display it on the page -->
+      <button type="submit" class="form-button" id="add" v-on:click.prevent="addDocument">Add Document</button>
     </div>
     <div class="popup">
       <span class="hello">hello!</span>
@@ -63,7 +67,6 @@
 <script>
 export default {
   name: "InputForm",
-  
   data() {
     return {
       DEED_BASE_FEE: 70.25,
@@ -115,8 +118,10 @@ export default {
       }
     },
     calculateTransferTax() {
-      let transferTaxAmount = this.consideration * 0.02;
-      return transferTaxAmount;
+      let transferTaxAmount;
+      if (this.hasTransferTax == true) {
+        transferTaxAmount = this.consideration * 0.02;
+      } return transferTaxAmount;
     },
     calculateTotalCharges() {
       if (this.documentType == "") {
@@ -131,12 +136,19 @@ export default {
         this.getERecordingFee;
       return total;
     },
+  },
+    methods: {
     addDocument() {
       let documentArray = [];
       documentArray.push(this.document);
       return documentArray;
+    },
+    clearForm() {
+      this.documentType = '',
+      this.pageCount = 1,
+      this.consideration = 0
     }
-  },
+  }
 };
 </script>
 
