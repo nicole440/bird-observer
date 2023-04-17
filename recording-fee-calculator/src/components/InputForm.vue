@@ -9,9 +9,7 @@
             <option value="Deed">Deed</option>
             <option value="Mortgage">Mortgage</option>
             <option value="Power of Attorney">Power of Attorney</option>
-            <option value="Assignment of Rents/Leases">
-              Assignment of Rents/Leases
-            </option>
+            <option value="Assignment of Rents/Leases">Assignment of Rents/Leases</option>
             <option value="Satisfaction Piece">Satisfaction Piece</option>
             <option value="Miscellaneous">Miscellaneous</option>
           </select>
@@ -27,7 +25,7 @@
           />
         </div>
 
-<!-- TODO fix radio buttons and make sure transfer tax gets calculated if needed -->
+<!-- TODO fix radio buttons and make sure transfer tax is calculated with that and consideration added to total, if needed -->
         <div class="form-group" id="consideration" v-if="documentType=='Deed'"> 
           <label for="consideration">Consideration: </label>
           <input type="number" v-model="consideration" />
@@ -49,7 +47,7 @@
         Total Charges: ${{ calculateTotalCharges.toFixed(2) }}
       </p>
       <button type="reset" class="form-button" id="clear" v-on:click.prevent="clearForm">Clear Form</button>
-<!-- TODO Work on making this button add a document to the data store and display it on the page -->
+<!-- TODO Work on making this button add a document to the data store and display it elsewhere on the page -->
       <button type="submit" class="form-button" id="add" v-on:click.prevent="addDocument">Add Document</button>
     </div>
     <div class="popup">
@@ -69,6 +67,7 @@ export default {
   name: "InputForm",
   data() {
     return {
+
       DEED_BASE_FEE: 70.25,
       POA_BASE_FEE: 18.5,
       MISC_BASE_FEE: 68.5,
@@ -76,12 +75,13 @@ export default {
       SIMPLIFILE_FEE: 4.75,
       OVER_FOUR_PAGE_FEE: 2.0,
 
-      documentType: "",
-      pageCount: 1,
-      hasFee: false,
-      hasTransferTax: false,
-      consideration: 0,
-      transferTaxAmount: 0,
+        documentType: "",
+        pageCount: 1,
+        hasFee: false,
+        hasTransferTax: false,
+        consideration: 0,
+        transferTaxAmount: 0,
+      
     };
   },
   computed: {
@@ -139,14 +139,13 @@ export default {
   },
     methods: {
     addDocument() {
-      let documentArray = [];
-      documentArray.push(this.document);
-      return documentArray;
+      this.$store.commit("ADD_NEW_DOCUMENT", this.document)
     },
     clearForm() {
       this.documentType = '',
       this.pageCount = 1,
-      this.consideration = 0
+      this.consideration = 0,
+      this.hasFee = false
     }
   }
 };
