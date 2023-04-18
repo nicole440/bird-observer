@@ -157,10 +157,10 @@ export default {
 .inner-container {
   max-width: 600px;
   margin: 50px auto;
-  /* display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; */
+  justify-content: center;
 }
 
 /* Form */
