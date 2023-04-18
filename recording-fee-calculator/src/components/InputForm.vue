@@ -68,12 +68,13 @@ export default {
   data() {
     return {
 
-      DEED_BASE_FEE: 70.25,
-      POA_BASE_FEE: 18.5,
-      MISC_BASE_FEE: 68.5,
+      DEED_MTGE_BASE_FEE: 70.25,
+      POA_BASE_FEE: 18.50,
+      MISC_BASE_FEE: 58.75,
       BASE_PAGE_THRESHOLD: 4,
       SIMPLIFILE_FEE: 4.75,
       OVER_FOUR_PAGE_FEE: 2.0,
+      TWO_PERCENT_TRANSFER_TAX: 0.02,
 
         documentType: "",
         pageCount: 1,
@@ -88,8 +89,8 @@ export default {
     getBaseFee() {
       // Calculate base fee
       let baseFee = 0;
-      if (this.documentType === "Deed") {
-        baseFee = this.DEED_BASE_FEE;
+      if (this.documentType === "Deed" || this.documentType === "Mortgage") {
+        baseFee = this.DEED_MTGE_BASE_FEE;
       } else if (this.documentType === "Power of Attorney") {
         baseFee = this.POA_BASE_FEE;
       } else {
@@ -120,7 +121,7 @@ export default {
     calculateTransferTax() {
       let transferTaxAmount;
       if (this.hasTransferTax == true) {
-        transferTaxAmount = this.consideration * 0.02;
+        transferTaxAmount = this.consideration * this.TWO_PERCENT_TRANSFER_TAX;
       } return transferTaxAmount;
     },
     calculateTotalCharges() {
