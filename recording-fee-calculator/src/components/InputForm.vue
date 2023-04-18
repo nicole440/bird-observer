@@ -25,7 +25,7 @@
           />
         </div>
 
-<!-- TODO fix radio buttons and make sure transfer tax is calculated with that and consideration added to total, if needed -->
+<!-- TODO fix radio buttons and make sure transfer tax is calculated and added to total, if needed -->
         <div class="form-group" id="consideration" v-if="documentType=='Deed'"> 
           <label for="consideration">Consideration: </label>
           <input type="number" v-model="consideration" />
@@ -132,7 +132,6 @@ export default {
         this.getBaseFee +
         this.getAdditionalPageFee +
         this.transferTaxAmount +
-        this.consideration +
         this.getERecordingFee;
       return total;
     },
