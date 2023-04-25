@@ -1,7 +1,10 @@
 <template>
     <div id="input-form">
-        <form>
-            <div>
+        <h1>Recording Fee Calculator</h1>
+
+
+        <form id="input-fields">
+            <div id="doc-options">
                 <label for="document-type">Document Type:</label>
                 <select id="document-type" v-model="documentType">
                     <option value="Deed">Deed</option>
@@ -14,19 +17,19 @@
                     <option value="Miscellaneous">Miscellaneous</option>
                 </select>
             </div>
-            <div>
+            <div id="page-count">
                 <label for="page-count">Page Count:</label>
                 <input id="page-count" type="number" v-model.number="pageCount" min="1" />
             </div>
-            <div>
+            <div id="efile-check">
                 <label>
                     <input type="checkbox" v-model="simplifileFee" />
                     Add Simplifile Fee ($4.75)
                 </label>
             </div>
-            <button type="button" @click="calculateFee">Calculate Fee</button>
+            <button type="button" @click="calculateFee">Calculate</button>
         </form>
-        <p>Total Fee: <span v-text="'$' + totalFee.toFixed(2)"></span></p>
+        <h3>Total Fee: <span v-text="'$' + totalFee.toFixed(2)"></span></h3>
     </div>
 </template>
       
@@ -80,8 +83,9 @@ export default {
 </script>
   
 <style scoped>
-#input-form {
+/* #input-form {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: minmax(150px, auto);
-}
+} */
 </style>
