@@ -28,7 +28,6 @@ export default {
   text-align: left;
   color: #2c3e50;
   background: #eee;
-  /* background-image: url(https://scontent.fwbw1-1.fna.fbcdn.net/v/t1.6435-9/89690658_10157175219921680_3024916127651201024_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_ohc=MgTQdfH_teIAX-tXofz&_nc_ht=scontent.fwbw1-1.fna&oh=00_AfC_dNoTA01myjff1ZqAAOKWxXJNcHNJ58ixxFsvdWXHHw&oe=646166F7); */
   background-image: url(https://images.unsplash.com/photo-1593018875302-1867d4de942c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80);
   background-repeat: no-repeat;
   background-position: center;
