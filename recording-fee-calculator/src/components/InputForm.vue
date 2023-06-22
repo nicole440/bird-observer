@@ -16,23 +16,17 @@
         </div>
         <div class="form-group">
           <label for="page-count" class="form-label">Page Count:</label>
-          <input
-            id="page-count"
-            type="number"
-            v-model.number="pageCount"
-            min="1"
-            class="form-input"
-          />
+          <input id="page-count" type="number" v-model.number="pageCount" min="1" class="form-input" />
         </div>
 
-<!-- TODO fix radio buttons and make sure transfer tax is calculated and added to total, if needed -->
-        <div class="form-group" id="consideration" v-if="documentType=='Deed'"> 
+        <!-- TODO fix radio buttons and make sure transfer tax is calculated and added to total, if needed -->
+        <div class="form-group" id="consideration" v-if="documentType == 'Deed'">
           <label for="consideration">Consideration: </label>
           <input type="number" v-model="consideration" />
           <label for="transfer-tax">Transfer Tax: </label>
-          <input type="radio" id="noTax" v-model="hasTransferTax" value="false"/>
+          <input type="radio" id="noTax" v-model="hasTransferTax" value="false" />
           <label for="noTax">Exempt</label>
-          <input type="radio" id ="tax" v-model="hasTransferTax" value="true" />
+          <input type="radio" id="tax" v-model="hasTransferTax" value="true" />
           <label for="tax">Not Exempt</label>
         </div>
 
@@ -47,7 +41,7 @@
         Total Charges: ${{ calculateTotalCharges.toFixed(2) }}
       </p>
       <button type="reset" class="form-button" id="clear" v-on:click.prevent="clearForm">Clear Form</button>
-<!-- TODO Work on making this button add a document to the data store and display it elsewhere on the page -->
+      <!-- TODO Work on making this button add a document to the data store and display it elsewhere on the page -->
       <button type="submit" class="form-button" id="add" v-on:click.prevent="addDocument">Add Document</button>
     </div>
     <div class="popup">
@@ -63,6 +57,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "InputForm",
   data() {
@@ -76,16 +72,17 @@ export default {
       OVER_FOUR_PAGE_FEE: 2.0,
       TWO_PERCENT_TRANSFER_TAX: 0.02,
 
-        documentType: "",
-        pageCount: 1,
-        hasFee: false,
-        hasTransferTax: false,
-        consideration: 0,
-        transferTaxAmount: 0,
-      
+      documentType: "",
+      pageCount: 1,
+      hasFee: false,
+      hasTransferTax: false,
+      consideration: 0,
+      transferTaxAmount: 0,
+
     };
   },
   computed: {
+    ...mapState(["documents"]), // Map the 'documents' state from the Vuex store to the 'documents' computed property in the component
     getBaseFee() {
       // Calculate base fee
       let baseFee = 0;
@@ -130,29 +127,39 @@ export default {
       }
       let total = 0;
       total =
-        this.getBaseFee +
-        this.getAdditionalPageFee +
-        this.transferTaxAmount +
-        this.getERecordingFee;
+        this.getBaseFee() +
+        this.getAdditionalPageFee() +
+        this.transferTaxAmount() +
+        this.getERecordingFee();
       return total;
     },
   },
-    methods: {
+  methods: {
     addDocument() {
-      this.$store.commit("ADD_NEW_DOCUMENT", this.document)
+      this.$store.commit("ADD_NEW_DOCUMENT", this.document);
+      this.document = {
+        documentType: "",
+        pageCount: "",
+        hasFee: false,
+        hasTransferTax: false,
+        consideration: "",
+        transferTaxAmount: "",
+      }
     },
     clearForm() {
       this.documentType = '',
-      this.pageCount = 1,
-      this.consideration = 0,
-      this.hasFee = false
+        this.pageCount = 1,
+        this.consideration = 0,
+        this.hasFee = false,
+        this.hasTransferTax = false,
+        this.consideration = 0,
+        this.transferTaxAmount = 0
     }
   }
 };
 </script>
 
 <style scoped>
-
 /* Container */
 .inner-container {
   max-width: 600px;
