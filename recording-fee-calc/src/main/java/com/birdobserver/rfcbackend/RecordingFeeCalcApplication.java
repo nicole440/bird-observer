@@ -1,4 +1,4 @@
-package com.birdobserver.recordingfeecalc;
+package com.birdobserver.rfcbackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

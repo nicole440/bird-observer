@@ -1,4 +1,4 @@
-package com.birdobserver.recordingfeecalc.model;
+package com.birdobserver.rfcbackend.model;
 
 import java.math.BigDecimal;
 import java.util.Map;

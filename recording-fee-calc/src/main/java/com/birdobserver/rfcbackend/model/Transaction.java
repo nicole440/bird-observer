@@ -1,4 +1,4 @@
-package com.birdobserver.recordingfeecalc.model;
+package com.birdobserver.rfcbackend.model;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class Transaction {
     private UUID transactionId;
-//    private List documentIds;
+    private List documentIds;
     private BigDecimal total;
 
     public Transaction(UUID transactionId, List documentIds, BigDecimal total) {

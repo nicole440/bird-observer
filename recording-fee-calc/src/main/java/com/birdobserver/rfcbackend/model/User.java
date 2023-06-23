@@ -1,4 +1,4 @@
-package com.birdobserver.recordingfeecalc.model;
+package com.birdobserver.rfcbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
