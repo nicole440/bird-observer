@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.birdobserver</groupId>
-	<artifactId>recording-fee-calc</artifactId>
+	<artifactId>rfcbackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>recording-fee-calc</name>
 	<description>Recording fee calculator</description>
