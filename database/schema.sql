@@ -17,7 +17,6 @@ CREATE TABLE users (
 	user_id varchar(50) NOT NULL,
 	username varchar(20) UNIQUE NOT NULL,
 	password_hash varchar(200) NOT NULL,
-	transaction_id varchar(50) NOT NULL,
 	role varchar(20),
 	CONSTRAINT PK_user_id PRIMARY KEY (user_id),
 	CONSTRAINT UQ_username UNIQUE (username)
@@ -38,7 +37,7 @@ CREATE TABLE documents (
 	page_count int NOT NULL,
 	erecording boolean NOT NULL,
 	total decimal(13, 2) NOT NULL,
-	CONSTRAINT PK_transfer PRIMARY KEY (document_id),
+	CONSTRAINT PK_document_id PRIMARY KEY (document_id),
 	CONSTRAINT FK_transaction_id FOREIGN KEY (transaction_id) REFERENCES transactions (transaction_id),
 	CONSTRAINT CK_total_gt_0 CHECK (total > 0)
 );
