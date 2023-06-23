@@ -10,13 +10,11 @@ public class User {
     private String username;
     @JsonIgnore
     private String password;
-    private List transactions;
 
-    public User(UUID userId, String username, String password, List transactions) {
+    public User(UUID userId, String username, String password) {
         this.userId = UUID.randomUUID();;
         this.username = username;
         this.password = password;
-        this.transactions = transactions;
     }
 
     public UUID getUserId() {
@@ -41,13 +39,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(List transactions) {
-        this.transactions = transactions;
     }
 }
