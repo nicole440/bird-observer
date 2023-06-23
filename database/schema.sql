@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS useres, transactions, documents, itemized_fees;
+DROP TABLE IF EXISTS users, transactions, documents, itemized_fees;
 DROP SEQUENCE IF EXISTS seq_document_id, seq_fee_id;
 
 CREATE SEQUENCE seq_document_id
