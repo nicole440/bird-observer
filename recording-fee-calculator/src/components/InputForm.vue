@@ -1,7 +1,7 @@
 <template>
   <div class="inner-container">
     <div class="form">
-      <h1 class="form-title">Recording Fee Calculator</h1>
+      <h1 class="form-title">Quick Start</h1>
       <form class="form-body">
         <div class="form-group">
           <label for="document-type" class="form-label">Document Type:</label>
@@ -40,7 +40,7 @@
       <p class="form-total" v-bind="calculateTotalCharges">
         Total Charges: ${{ calculateTotalCharges.toFixed(2) }}
       </p>
-      <button type="reset" class="form-button" id="clear" v-on:click.prevent="clearForm">Clear Form</button>
+      <button type="reset" class="form-button" id="clear" v-on:click.prevent="clearForm">Clear</button>
       <!-- TODO Work on making this button add a document to the data store and display it elsewhere on the page -->
       <button type="submit" class="form-button" id="add" v-on:click.prevent="addDocument">Add Document</button>
     </div>
@@ -116,7 +116,7 @@ export default {
       }
     },
     calculateTransferTax() {
-      let transferTaxAmount;
+      let transferTaxAmount = 0;
       if (this.hasTransferTax == true) {
         transferTaxAmount = this.consideration * this.TWO_PERCENT_TRANSFER_TAX;
       } return transferTaxAmount;
@@ -129,7 +129,7 @@ export default {
       total =
         this.getBaseFee() +
         this.getAdditionalPageFee() +
-        this.transferTaxAmount() +
+        this.transferTaxAmount +
         this.getERecordingFee();
       return total;
     },
@@ -163,7 +163,7 @@ export default {
 /* Container */
 .inner-container {
   max-width: 600px;
-  margin: 50px auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
