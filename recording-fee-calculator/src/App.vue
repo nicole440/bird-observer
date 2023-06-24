@@ -12,6 +12,7 @@
       <router-link v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
     </div> -->
+    
   </div>
 </template>
 
@@ -64,7 +65,7 @@ header {
   margin: auto 25%;
 }
 
-header > h1 {
+ header > h1 {
   font-family: Raleway, sans-serif;
   text-align: center;
   font-size: 4em;
