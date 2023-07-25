@@ -5,7 +5,7 @@
     </header>
     <div class="container">
       <InputForm />
-      <DocumentList />
+      <!-- <DocumentList /> -->
     </div>
 
     <!-- <div>
@@ -18,14 +18,14 @@
 
 <script>
 import InputForm from './components/InputForm.vue'
-import DocumentList from './components/DocumentList.vue'
+// import DocumentList from './components/DocumentList.vue'
 
 export default {
   name: 'App',
   documents: [],
   components: {
     InputForm,
-    DocumentList
+    // DocumentList
   }
 }
 </script>
@@ -62,7 +62,7 @@ body {
 
 header {
   position: fixed;
-  margin: auto 25%;
+  margin: 0 auto;
 }
 
  header > h1 {
