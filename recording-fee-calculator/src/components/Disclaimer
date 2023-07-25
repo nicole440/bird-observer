@@ -1,0 +1,44 @@
+<script setup></script>
+
+<template>
+    <div class="popup">
+        <span class="hello">hello!</span>
+        <p class="message">
+            The fees specified herein are specific to the recording fees set by the
+            Lancaster County Recorder of Deeds Office and the Simplifile e-recording
+            software. Please confirm base fees remain accurate before submitting
+            documents for recording.
+        </p>
+    </div>
+</template>
+
+<style scoped>
+    .popup {
+        position: fixed;
+        bottom: 0;
+        right: 30px;
+        background: linear-gradient(to bottom, rgb(99, 172, 240), rgba(122, 218, 235, 0.7));
+        color: #000;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        width: 100px;
+        height: 35px;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .popup p {
+        margin-bottom: 10px;
+    }
+
+    .popup:hover {
+        width: 300px;
+        height: 200px;
+        padding: 10px;
+    }
+
+    .hello {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+</style>
