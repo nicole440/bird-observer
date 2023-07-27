@@ -23,13 +23,6 @@
         <div class="form-group" id="consideration" v-if="documentType == 'Deed'">
           <label for="consideration">Consideration: </label>
           <input type="number" v-model="consideration" />
-<<<<<<< HEAD
-          <label for="transfer-tax">Transfer Tax: </label>
-          <input type="radio" id="noTax" v-model="hasTransferTax" value="false" />
-          <label for="noTax">Exempt</label>
-          <input type="radio" id="tax" v-model="hasTransferTax" value="true" />
-          <label for="tax">Not Exempt</label>
-=======
 
           <div class="transfer-tax">
             <label for="transfer-tax">Transfer Tax: </label>
@@ -42,7 +35,6 @@
               <input type="radio" id="tax" v-model="hasTransferTax" :value="true" />
             </div>
           </div>
->>>>>>> bug-fixes
         </div>
 
         <div>
@@ -55,18 +47,14 @@
       <p class="form-total" v-bind="calculateTotalCharges">
         Total Charges: ${{ calculateTotalCharges.toFixed(2) }}
       </p>
-<<<<<<< HEAD
       <button type="reset" class="form-button" id="clear" v-on:click.prevent="clearForm">Clear</button>
-=======
-      <button type="reset" class="form-button" id="clear" v-on:click.prevent="clearForm">Clear Form</button>
->>>>>>> bug-fixes
       <!-- TODO Work on making this button add a document to the data store and display it elsewhere on the page -->
       <button type="submit" class="form-button" id="add" v-on:click.prevent="addDocument">Add Document</button>
     </div>
     <div class="popup">
       <span class="hello">hello!</span>
       <p class="message">
-        The fees listed herein are specific to the recording fees set by the
+        The fees generated herein are specific to the recording fees set by the
         Lancaster County Recorder of Deeds Office and the Simplifile e-recording
         software. Additionally, transfer tax is calculated at 2% of the sale price.
         Please confirm base fees remain accurate before submitting
@@ -77,7 +65,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 
 export default {
   name: "InputForm",
@@ -102,7 +90,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["documents"]), // Map the 'documents' state from the Vuex store to the 'documents' computed property in the component
+    // ...mapState(["documents"]), // Map the 'documents' state from the Vuex store to the 'documents' computed property in the component
     getBaseFee() {
       // Calculate base fee
       let baseFee = 0;
@@ -137,16 +125,10 @@ export default {
       }
     },
     calculateTransferTax() {
-<<<<<<< HEAD
-      let transferTaxAmount = 0;
-      if (this.hasTransferTax == true) {
-        transferTaxAmount = this.consideration * this.TWO_PERCENT_TRANSFER_TAX;
-=======
       // If not exempt from transfer tax, calculate 2% of consideration
       let transferTaxAmount = 0;
       if (this.hasTransferTax == true && this.consideration > 1) {
         transferTaxAmount += this.consideration * this.TWO_PERCENT_TRANSFER_TAX;
->>>>>>> bug-fixes
       } return transferTaxAmount;
     },
     calculateTotalCharges() {
@@ -156,17 +138,10 @@ export default {
       }
       let total = 0;
       total =
-<<<<<<< HEAD
-        this.getBaseFee() +
-        this.getAdditionalPageFee() +
-        this.transferTaxAmount +
-        this.getERecordingFee();
-=======
         this.getBaseFee +
         this.getAdditionalPageFee +
         this.calculateTransferTax +
         this.getERecordingFee;
->>>>>>> bug-fixes
       return total;
     },
   },
@@ -186,14 +161,7 @@ export default {
       this.documentType = '',
         this.pageCount = 1,
         this.consideration = 0,
-<<<<<<< HEAD
-        this.hasFee = false,
-        this.hasTransferTax = false,
-        this.consideration = 0,
-        this.transferTaxAmount = 0
-=======
         this.hasFee = false
->>>>>>> bug-fixes
     }
   }
 };
@@ -326,13 +294,13 @@ export default {
   position: fixed;
   bottom: 0;
   right: 30px;
-  background: linear-gradient(to bottom, rgb(99, 172, 240), rgba(122, 218, 235, 0.7));
+  background: linear-gradient(to bottom, rgb(240, 231, 99), rgba(192, 235, 122, 0.7));
   color: #000;
   text-align: center;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   width: 100px;
-  height: 35px;
+  height: 30px;
   transition: all 0.2s ease-in-out;
 }
 
@@ -349,5 +317,11 @@ export default {
 .hello {
   font-size: 1.5em;
   font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .popup {
+    height: 30px;
+  }
 }
 </style>

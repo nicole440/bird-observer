@@ -42,6 +42,7 @@ export default {
   background-position: center;
   background-size: cover;
   min-height: 100vh;
+  margin: 0 auto;
 }
 
 body {
@@ -55,23 +56,43 @@ body {
   padding: 1rem;
 }
 
+.form {
+  position: relative;
+  margin-top: 25px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0 auto;
 }
 
 header {
-  position: fixed;
+  position: absolute;
   margin: 0 auto;
+  width: 100vw;
 }
 
  header > h1 {
   font-family: Raleway, sans-serif;
+  font-weight: 600;
   text-align: center;
-  font-size: 4em;
-  color: #FFF;
+  font-size: 3em;
+  color: #edf4f8;
   background-color: rgba(224, 77, 84, 0.329);
-  padding: 30px;
+  padding: 10px;
 }
+
+@media (max-width: 600px) {
+  header > h1 {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: 390px) {
+  header > h1 {
+    font-size: 1.5em;
+  }
+}
+
 
 </style>
