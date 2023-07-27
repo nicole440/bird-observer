@@ -16,46 +16,48 @@
         </div>
         <div class="form-group">
           <label for="page-count" class="form-label">Page Count:</label>
-          <input
-            id="page-count"
-            type="number"
-            v-model.number="pageCount"
-            min="1"
-            class="form-input"
-          />
+          <input id="page-count" type="number" v-model.number="pageCount" min="1" class="form-input" />
         </div>
 
-<!-- TODO fix radio buttons and make sure transfer tax is calculated and added to total, if needed -->
-        <div class="form-group" id="consideration" v-if="documentType=='Deed'"> 
+        <!-- TODO fix radio buttons and make sure transfer tax is calculated and added to total, if needed -->
+        <div class="form-group" id="consideration" v-if="documentType == 'Deed'">
           <label for="consideration">Consideration: </label>
           <input type="number" v-model="consideration" />
-          <label for="transfer-tax">Transfer Tax: </label>
-          <input type="radio" id="noTax" v-model="hasTransferTax" value="false"/>
-          <label for="noTax">Exempt</label>
-          <input type="radio" id ="tax" v-model="hasTransferTax" value="true" />
-          <label for="tax">Not Exempt</label>
+
+          <div class="transfer-tax">
+            <label for="transfer-tax">Transfer Tax: </label>
+            <div class="transfer-tax-option">
+              <label for="noTax">Exempt</label>
+              <input type="radio" id="noTax" v-model="hasTransferTax" :value="false" />
+            </div>
+            <div class="transfer-tax-option">
+              <label for="tax">Not Exempt</label>
+              <input type="radio" id="tax" v-model="hasTransferTax" :value="true" />
+            </div>
+          </div>
         </div>
 
         <div>
-          <label>
+          <div class="efile">
+            <label>Add Simplifile Fee ($4.75)</label>
             <input type="checkbox" v-model="hasFee" />
-            Add Simplifile Fee ($4.75)
-          </label>
+          </div>
         </div>
       </form>
       <p class="form-total" v-bind="calculateTotalCharges">
         Total Charges: ${{ calculateTotalCharges.toFixed(2) }}
       </p>
       <button type="reset" class="form-button" id="clear" v-on:click.prevent="clearForm">Clear Form</button>
-<!-- TODO Work on making this button add a document to the data store and display it elsewhere on the page -->
+      <!-- TODO Work on making this button add a document to the data store and display it elsewhere on the page -->
       <button type="submit" class="form-button" id="add" v-on:click.prevent="addDocument">Add Document</button>
     </div>
     <div class="popup">
       <span class="hello">hello!</span>
       <p class="message">
-        The fees specified herein are specific to the recording fees set by the
+        The fees listed herein are specific to the recording fees set by the
         Lancaster County Recorder of Deeds Office and the Simplifile e-recording
-        software. Please confirm base fees remain accurate before submitting
+        software. Additionally, transfer tax is calculated at 2% of the sale price.
+        Please confirm base fees remain accurate before submitting
         documents for recording.
       </p>
     </div>
@@ -76,13 +78,13 @@ export default {
       OVER_FOUR_PAGE_FEE: 2.0,
       TWO_PERCENT_TRANSFER_TAX: 0.02,
 
-        documentType: "",
-        pageCount: 1,
-        hasFee: false,
-        hasTransferTax: false,
-        consideration: 0,
-        transferTaxAmount: 0,
-      
+      documentType: "",
+      pageCount: 1,
+      hasFee: false,
+      hasTransferTax: false,
+      consideration: 0,
+      transferTaxAmount: 0,
+
     };
   },
   computed: {
@@ -112,6 +114,7 @@ export default {
       return additionalPageFee;
     },
     getERecordingFee() {
+      // Add Simplifile fee if box is checked
       if (this.hasFee) {
         return this.SIMPLIFILE_FEE;
       } else {
@@ -119,12 +122,14 @@ export default {
       }
     },
     calculateTransferTax() {
-      let transferTaxAmount;
-      if (this.hasTransferTax == true) {
-        transferTaxAmount = this.consideration * this.TWO_PERCENT_TRANSFER_TAX;
+      // If not exempt from transfer tax, calculate 2% of consideration
+      let transferTaxAmount = 0;
+      if (this.hasTransferTax == true && this.consideration > 1) {
+        transferTaxAmount += this.consideration * this.TWO_PERCENT_TRANSFER_TAX;
       } return transferTaxAmount;
     },
     calculateTotalCharges() {
+      // Add together all charges
       if (this.documentType == "") {
         return 0;
       }
@@ -132,27 +137,26 @@ export default {
       total =
         this.getBaseFee +
         this.getAdditionalPageFee +
-        this.transferTaxAmount +
+        this.calculateTransferTax +
         this.getERecordingFee;
       return total;
     },
   },
-    methods: {
+  methods: {
     addDocument() {
       this.$store.commit("ADD_NEW_DOCUMENT", this.document)
     },
     clearForm() {
       this.documentType = '',
-      this.pageCount = 1,
-      this.consideration = 0,
-      this.hasFee = false
+        this.pageCount = 1,
+        this.consideration = 0,
+        this.hasFee = false
     }
   }
 };
 </script>
 
 <style scoped>
-
 /* Container */
 .inner-container {
   max-width: 600px;
@@ -229,6 +233,15 @@ export default {
   font-weight: 400;
   color: #333;
 }
+.transfer-tax-option {
+  display: inline-block;
+  width:150px;
+}
+
+.transfer-tax {
+  display: inline;
+}
+
 
 /* Button */
 .form button {
@@ -247,6 +260,14 @@ export default {
 
 .form button:hover {
   background-color: #555;
+}
+
+.form-button#add {
+  background-color: gray;
+}
+.form-button#add:hover {
+  background-color: gray;
+  cursor:not-allowed;
 }
 
 /* Total */
