@@ -24,7 +24,6 @@ class TestFeeScraper(unittest.TestCase):
 
         fee_list = fee_list[0:5]
 
-        # Replace these with the expected values from the webpage
         expected_fees = ['$49.00', '$37.50', '$58.75', '$18.50', '$2.00']
 
         self.assertEqual(fee_list, expected_fees)
